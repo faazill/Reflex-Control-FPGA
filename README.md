@@ -8,7 +8,7 @@ An educational FPGA architecture exploring **neuromorphic event processing** for
 
 > **Note:** This project is a hardware feasibility study. It uses Hardware-in-the-Loop (HIL) simulation to validate the RTL logic path and is not a production-ready safety system.
 
-## 📐 System Architecture
+## System Architecture
 
 The design pipeline mimics a "Spinal Cord" reflex, processing sensor data without OS intervention.
 
@@ -17,7 +17,7 @@ The design pipeline mimics a "Spinal Cord" reflex, processing sensor data withou
 3.  **Spike Encoder (RTL):** Converts error magnitude into temporal spike trains (Rate Coding).
 4.  **LIF Neuron (RTL):** A Leaky Integrate-and-Fire core that triggers a veto signal if error density exceeds a dynamic threshold.
 
-## 📊 Key Results (Simulation)
+## Key Results (Simulation)
 
 * **Processing Latency:** < 1 µs (FPGA Logic Path)
 * **Resource Usage:** ~6,900 Logic Cells (<11% SNN Core Utilization)
@@ -30,7 +30,7 @@ The design pipeline mimics a "Spinal Cord" reflex, processing sensor data withou
 | `snn_reflex_core` | LIF Neuron & Thresholding | ~750 |
 | **Total** | **Full Reflex Layer** | **~6,900** |
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 * Icarus Verilog (`iverilog`)
@@ -57,10 +57,10 @@ The design pipeline mimics a "Spinal Cord" reflex, processing sensor data withou
     gtkwave pybullet_wave.vcd
     ```
 
-## ⚠️ Scope & Limitations
+## Scope & Limitations
 * **Input Data:** The system currently ingests frame-based pixel data converted to a stream. Future iterations would target true AER (Address Event Representation) protocols for Dynamic Vision Sensors (DVS).
 * **Safety Logic:** The current slip detection relies on geometric symmetry, which assumes structured lighting and symmetric payloads.
 * **Platform:** Validated via behavioral synthesis and simulation. Static Timing Analysis (STA) target is 100 MHz on Artix-7 fabric.
 
-## 📜 License
+## License
 MIT License - Open for educational and research use.
