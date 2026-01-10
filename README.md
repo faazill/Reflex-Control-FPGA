@@ -1,90 +1,66 @@
-# Event-Driven Reflex Control on FPGA
+# FPGA-Based Event-Driven Reflex Core (Prototype)
 
-![Status](https://img.shields.io/badge/Status-Verified-success)
-![Stack](https://img.shields.io/badge/Stack-Verilog_%7C_Python_%7C_PyBullet-blue)
+![Status](https://img.shields.io/badge/Status-Prototype_Verified-blue)
 ![Architecture](https://img.shields.io/badge/Architecture-Neuromorphic_SNN-purple)
+![Hardware](https://img.shields.io/badge/Hardware-Artix--7_Compatible-green)
 
-A hardware-based safety layer for robotic manipulation. This FPGA core acts as a parallel "spinal cord," monitoring geometric stability in real-time and vetoing unsafe AI commands in **< 1 µs**.
+An educational FPGA architecture exploring **neuromorphic event processing** for robotic safety. This core implements a hardware-accelerated **Spiking Neural Network (SNN)** to detect geometric anomalies (slip/drift) in synthetic sensor streams with deterministic latency.
 
-## Problem vs. Solution
+> **Note:** This project is a hardware feasibility study. It uses Hardware-in-the-Loop (HIL) simulation to validate the RTL logic path and is not a production-ready safety system.
 
-| Feature | Software Control (ROS/Python) | FPGA Reflex (This Project) |
-|---------|-------------------------------|----------------------------|
-| **Latency** | ~10-50 ms (OS Jitter) | **< 1 µs (Deterministic)** |
-| **Safety** | Reactive (Post-failure) | **Pre-emptive (Pre-failure)** |
-| **Role** | High-level Planning | **Low-level Hardware Veto** |
+## 📐 System Architecture
 
-## System Architecture
+The design pipeline mimics a "Spinal Cord" reflex, processing sensor data without OS intervention.
 
-```mermaid
-graph LR
-    Sensors[Sensor Stream] -->|Pixels| Monitor[Symmetry Monitor]
-    Monitor -->|Moments| Encoder[Spike Encoder]
-    Encoder -->|Spikes| SNN[SNN Reflex Core]
-    
-    AI[AI Policy] -->|Unsafe Torque| Gate[Policy Gate]
-    SNN -->|VETO Signal| Gate
-    Gate -->|Safe Command| Motor[Robotic Arm]
-```
+1.  **Synthetic Event Source:** Python/PyBullet simulation generates pixel streams representing a slipping object.
+2.  **Symmetry Monitor (RTL):** Calculates 1D geometric moments (Centroid Drift, Spread) in real-time.
+3.  **Spike Encoder (RTL):** Converts error magnitude into temporal spike trains (Rate Coding).
+4.  **LIF Neuron (RTL):** A Leaky Integrate-and-Fire core that triggers a veto signal if error density exceeds a dynamic threshold.
 
-## Performance Verification
+## 📊 Key Results (Simulation)
 
-### 1. Hardware-in-the-Loop (HIL) Validation
+* **Processing Latency:** < 1 µs (FPGA Logic Path)
+* **Resource Usage:** ~6,900 Logic Cells (<11% SNN Core Utilization)
+* **Validation:** Verified against synthetic slip traces generated via PyBullet.
 
-Validated using PyBullet physics engine to simulate a micro-slip event. The FPGA detects the slip onset and triggers the reflex before the object drops.
+| Module | Function | Logic Cells (Est.) |
+| :--- | :--- | :--- |
+| `symmetry_monitor` | 1st/2nd Moment Calculation | ~4,100 |
+| `spike_encoder` | Rate-based Spike Generation | ~1,800 |
+| `snn_reflex_core` | LIF Neuron & Thresholding | ~750 |
+| **Total** | **Full Reflex Layer** | **~6,900** |
 
-![Reflex Activation](results/reflex_activation_graph.png)
+## 🚀 Quick Start
 
-*Figure 1: `drift_metric` (Green) spikes upon slip detection. `reflex_active` fires immediately, forcing motor output to 0.*
+### Prerequisites
+* Icarus Verilog (`iverilog`)
+* GTKWave
+* Python 3 + PyBullet
 
-### 2. FPGA Resource Utilization (Yosys Synthesis)
+### Running the HIL Verification
+1.  **Generate Synthetic Trace:**
+    ```bash
+    cd python_model
+    python3 generate_grasp_trace.py
+    ```
+    *Creates `grasp_trace.hex` (simulated sensor stream).*
 
-Synthesized for low-power edge FPGAs (e.g., Artix-7). The SNN core is highly efficient, consuming only ~11% of the total logic.
+2.  **Run RTL Simulation:**
+    ```bash
+    cd ..
+    iverilog -o reflex_sim tb/tb_pybullet_replay.v rtl/*.v
+    vvp reflex_sim
+    ```
 
-| Module | Logic Cells | Flip-Flops | Est. Logic Depth |
-|--------|-------------|------------|------------------|
-| Symmetry Monitor | 4,148 | 136 | ~22 |
-| Spike Encoder | 1,812 | 86 | ~12 |
-| SNN Reflex Core | 747 | 37 | ~6 |
-| Policy Gate | 188 | 34 | ~2 |
-| **Total System** | **6,895** | **293** | **~22** |
+3.  **View Waveforms:**
+    ```bash
+    gtkwave pybullet_wave.vcd
+    ```
 
-## Quick Start
+## ⚠️ Scope & Limitations
+* **Input Data:** The system currently ingests frame-based pixel data converted to a stream. Future iterations would target true AER (Address Event Representation) protocols for Dynamic Vision Sensors (DVS).
+* **Safety Logic:** The current slip detection relies on geometric symmetry, which assumes structured lighting and symmetric payloads.
+* **Platform:** Validated via behavioral synthesis and simulation. Static Timing Analysis (STA) target is 100 MHz on Artix-7 fabric.
 
-**Prerequisites:** `iverilog`, `gtkwave`, `python3`, `pybullet`
-
-### 1. Generate Physics Trace
-
-Run the robotic simulation:
-
-```bash
-cd python_model
-python3 generate_grasp_trace.py
-cd ..
-```
-
-### 2. Run RTL Simulation
-
-Feed trace to Verilog:
-
-```bash
-iverilog -o grasp_sim tb/tb_pybullet_replay.v rtl/*.v
-vvp grasp_sim
-```
-
-### 3. View Waveforms
-
-```bash
-gtkwave pybullet_wave.vcd
-```
-
-## Repository Structure
-
-* `rtl/`: Synthesizable Verilog source (LIF Neuron, Rate Encoder).
-* `tb/`: Testbenches for HIL replay.
-* `python_model/`: PyBullet physics scripts.
-* `results/`: Validation artifacts and synthesis logs.
-
----
-
-*Verified on macOS via Icarus Verilog & Yosys Open-Source Flow.*
+## 📜 License
+MIT License - Open for educational and research use.
