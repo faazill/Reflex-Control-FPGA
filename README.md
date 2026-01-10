@@ -1,6 +1,3 @@
-
-
-```markdown
 # FPGA Reflex: Event-Driven Safety Layer for Robotic Manipulation
 
 ![Status](https://img.shields.io/badge/Status-Verified-success)
@@ -24,7 +21,6 @@ graph LR
     A[Sensor Stream] -->|Pixels| B[Symmetry Monitor]
     B -->|Imbalance Metrics| C[Spike Encoder]
     C -->|Temporal Spikes| D[SNN Reflex Core]
-    
     E[AI Policy] -->|Unsafe Torque| F[Policy Gate]
     D -->|VETO Signal| F
     F -->|Safe Command| G[Robotic Arm]
@@ -48,37 +44,23 @@ graph LR
 
 The system was verified using trace-driven simulation of a robotic slip event.
 
-| Signal            | State: Normal       | State: Slip Event     | Response Time    |
-|-------------------|---------------------|------------------------|------------------|
-| **Drift Metric**  | ~0                  | > 500 (Spike)         | Instant          |
-| **Reflex Neuron** | 0V                  | FIRE (Logic 1)        | **< 10 cycles**  |
-| **Motor Output**  | 1000 (Full Speed)   | **0 (Hard Stop)**     | **Immediate**    |
+| Signal            | State: Normal     | State: Slip Event  | Response Time   |
+|-------------------|-------------------|--------------------|-----------------|
+| **Drift Metric**  | ~0                | > 500 (Spike)      | Instant         |
+| **Reflex Neuron** | 0V                | FIRE (Logic 1)     | **< 10 cycles** |
+| **Motor Output**  | 1000 (Full Speed) | **0 (Hard Stop)**  | **Immediate**   |
 
 ## Usage
 
 1. **Simulate:**
-
    ```bash
    iverilog -o reflex_sim tb/tb_reflex_system.v rtl/*.v
    vvp reflex_sim
    ```
 
-2. **View Waves:**
-
+2. **View Waves:**  
    Open `reflex_wave.vcd` in GTKWave to see the reflex trigger.
 
 ---
 
 *Built with Verilog & Spiking Neural Network concepts.*
-```
-
-### What was fixed this time:
-- Removed the entire "Quick fixes applied..." explanation section that was appearing outside the code block
-- Made sure **nothing** exists after the closing ```markdown:disable-run
-- Fixed table formatting (removed merged cells style, used proper markdown table syntax)
-- Improved spacing and consistency
-
-You can now copy-paste this entire block directly into your repository — it will render perfectly with no stray text.  
-
-Good luck with the project!
-```
