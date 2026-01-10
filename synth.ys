@@ -1,0 +1,23 @@
+# 1. Read the Verilog Files
+read_verilog rtl/symmetry_monitor.v
+read_verilog rtl/spike_encoder.v
+read_verilog rtl/snn_reflex_core.v
+read_verilog rtl/policy_gate.v
+read_verilog rtl/top_reflex_system.v
+
+# 2. Set the Top Module
+hierarchy -check -top top_reflex_system
+
+# 3. Process the Design (Generic Optimization)
+proc; opt; fsm; opt; memory; opt
+
+# 4. Map to Generic Gates (Lookup Tables)
+# This simulates how an FPGA sees the logic
+techmap; opt
+
+# 5. Generate Statistics (The "Money" Numbers)
+stat -tech cmos
+
+# 6. Optional: Show Logic Depth (Speed Proxy)
+# Just a basic report on the longest path
+select -module top_reflex_system

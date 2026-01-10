@@ -1,0 +1,1207 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.60 (git sha1 5bafeb77dc71e054fa331ab9efa613e6fb0a1c49, clang++ 17.0.0 -fPIC -O3)
+
+-- Executing script file `synth.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/symmetry_monitor.v
+Parsing Verilog input from `rtl/symmetry_monitor.v' to AST representation.
+verilog frontend filename rtl/symmetry_monitor.v
+Generating RTLIL representation for module `\symmetry_monitor'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/spike_encoder.v
+Parsing Verilog input from `rtl/spike_encoder.v' to AST representation.
+verilog frontend filename rtl/spike_encoder.v
+Generating RTLIL representation for module `\spike_encoder'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/snn_reflex_core.v
+Parsing Verilog input from `rtl/snn_reflex_core.v' to AST representation.
+verilog frontend filename rtl/snn_reflex_core.v
+Generating RTLIL representation for module `\snn_reflex_core'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/policy_gate.v
+Parsing Verilog input from `rtl/policy_gate.v' to AST representation.
+verilog frontend filename rtl/policy_gate.v
+Generating RTLIL representation for module `\policy_gate'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/top_reflex_system.v
+Parsing Verilog input from `rtl/top_reflex_system.v' to AST representation.
+verilog frontend filename rtl/top_reflex_system.v
+Generating RTLIL representation for module `\top_reflex_system'.
+Successfully finished Verilog frontend.
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1. Analyzing design hierarchy..
+Top module:  \top_reflex_system
+Used module:     \policy_gate
+Used module:     \snn_reflex_core
+Used module:     \spike_encoder
+Used module:     \symmetry_monitor
+
+6.2. Analyzing design hierarchy..
+Top module:  \top_reflex_system
+Used module:     \policy_gate
+Used module:     \snn_reflex_core
+Used module:     \spike_encoder
+Used module:     \symmetry_monitor
+Removed 0 unused modules.
+
+7. Executing PROC pass (convert processes to netlists).
+
+7.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+7.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 4 switch rules as full_case in process $proc$rtl/policy_gate.v:21$104 in module policy_gate.
+Marked 3 switch rules as full_case in process $proc$rtl/snn_reflex_core.v:34$98 in module snn_reflex_core.
+Marked 5 switch rules as full_case in process $proc$rtl/spike_encoder.v:36$20 in module spike_encoder.
+Marked 2 switch rules as full_case in process $proc$rtl/symmetry_monitor.v:42$4 in module symmetry_monitor.
+Removed a total of 0 dead cases.
+
+7.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 9 redundant assignments.
+Promoted 12 assignments to connections.
+
+7.4. Executing PROC_INIT pass (extract init attributes).
+
+7.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst in `\policy_gate.$proc$rtl/policy_gate.v:21$104'.
+Found async reset \rst in `\snn_reflex_core.$proc$rtl/snn_reflex_core.v:34$98'.
+Found async reset \rst in `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+Found async reset \rst in `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+
+7.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~12 debug messages>
+
+7.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\policy_gate.$proc$rtl/policy_gate.v:21$104'.
+     1/4: $0\override_status[0:0]
+     2/4: $0\final_command[15:0]
+     3/4: $0\locked[0:0]
+     4/4: $0\lock_counter[15:0]
+Creating decoders for process `\snn_reflex_core.$proc$rtl/snn_reflex_core.v:34$98'.
+     1/3: $0\potential[19:0]
+     2/3: $0\reflex_active[0:0]
+     3/3: $0\v_mem[15:0]
+Creating decoders for process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+     1/42: $3\abs_val$func$rtl/spike_encoder.v:76$18.$result[31:0]$82
+     2/42: $3\abs_val$func$rtl/spike_encoder.v:76$18.val[31:0]$83
+     3/42: $3\abs_val$func$rtl/spike_encoder.v:78$19.val[31:0]$85
+     4/42: $3\abs_val$func$rtl/spike_encoder.v:78$19.$result[31:0]$84
+     5/42: $3\abs_val$func$rtl/spike_encoder.v:66$16.$result[31:0]$70
+     6/42: $3\abs_val$func$rtl/spike_encoder.v:66$16.val[31:0]$71
+     7/42: $3\abs_val$func$rtl/spike_encoder.v:68$17.val[31:0]$73
+     8/42: $3\abs_val$func$rtl/spike_encoder.v:68$17.$result[31:0]$72
+     9/42: $3\abs_val$func$rtl/spike_encoder.v:56$14.$result[31:0]$58
+    10/42: $3\abs_val$func$rtl/spike_encoder.v:56$14.val[31:0]$59
+    11/42: $3\abs_val$func$rtl/spike_encoder.v:60$15.val[31:0]$61
+    12/42: $3\abs_val$func$rtl/spike_encoder.v:60$15.$result[31:0]$60
+    13/42: $2\abs_val$func$rtl/spike_encoder.v:78$19.val[31:0]$56
+    14/42: $2\abs_val$func$rtl/spike_encoder.v:78$19.$result[31:0]$55
+    15/42: $2\abs_val$func$rtl/spike_encoder.v:76$18.val[31:0]$54
+    16/42: $2\abs_val$func$rtl/spike_encoder.v:76$18.$result[31:0]$53
+    17/42: $2\abs_val$func$rtl/spike_encoder.v:68$17.val[31:0]$52
+    18/42: $2\abs_val$func$rtl/spike_encoder.v:68$17.$result[31:0]$51
+    19/42: $2\abs_val$func$rtl/spike_encoder.v:66$16.val[31:0]$50
+    20/42: $2\abs_val$func$rtl/spike_encoder.v:66$16.$result[31:0]$49
+    21/42: $2\abs_val$func$rtl/spike_encoder.v:60$15.val[31:0]$48
+    22/42: $2\abs_val$func$rtl/spike_encoder.v:60$15.$result[31:0]$47
+    23/42: $2\abs_val$func$rtl/spike_encoder.v:56$14.val[31:0]$46
+    24/42: $2\abs_val$func$rtl/spike_encoder.v:56$14.$result[31:0]$45
+    25/42: $1\abs_val$func$rtl/spike_encoder.v:78$19.val[31:0]$44
+    26/42: $1\abs_val$func$rtl/spike_encoder.v:78$19.$result[31:0]$43
+    27/42: $1\abs_val$func$rtl/spike_encoder.v:76$18.val[31:0]$42
+    28/42: $1\abs_val$func$rtl/spike_encoder.v:76$18.$result[31:0]$41
+    29/42: $1\abs_val$func$rtl/spike_encoder.v:68$17.val[31:0]$40
+    30/42: $1\abs_val$func$rtl/spike_encoder.v:68$17.$result[31:0]$39
+    31/42: $1\abs_val$func$rtl/spike_encoder.v:66$16.val[31:0]$38
+    32/42: $1\abs_val$func$rtl/spike_encoder.v:66$16.$result[31:0]$37
+    33/42: $1\abs_val$func$rtl/spike_encoder.v:60$15.val[31:0]$36
+    34/42: $1\abs_val$func$rtl/spike_encoder.v:60$15.$result[31:0]$35
+    35/42: $1\abs_val$func$rtl/spike_encoder.v:56$14.val[31:0]$34
+    36/42: $1\abs_val$func$rtl/spike_encoder.v:56$14.$result[31:0]$33
+    37/42: $0\spike_shock[0:0]
+    38/42: $0\spike_spread[0:0]
+    39/42: $0\spike_drift[0:0]
+    40/42: $0\acc_change[24:0]
+    41/42: $0\acc_spread[32:0]
+    42/42: $0\acc_drift[24:0]
+Creating decoders for process `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+     1/6: $0\prev_m1_final[23:0]
+     2/6: $0\acc_m2[31:0]
+     3/6: $0\acc_m1[23:0]
+     4/6: $0\sudden_change[23:0]
+     5/6: $0\spread_metric[31:0]
+     6/6: $0\drift_metric[23:0]
+
+7.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+7.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\policy_gate.\final_command' using process `\policy_gate.$proc$rtl/policy_gate.v:21$104'.
+  created $adff cell `$procdff$299' with positive edge clock and positive level reset.
+Creating register for signal `\policy_gate.\override_status' using process `\policy_gate.$proc$rtl/policy_gate.v:21$104'.
+  created $adff cell `$procdff$302' with positive edge clock and positive level reset.
+Creating register for signal `\policy_gate.\lock_counter' using process `\policy_gate.$proc$rtl/policy_gate.v:21$104'.
+  created $adff cell `$procdff$305' with positive edge clock and positive level reset.
+Creating register for signal `\policy_gate.\locked' using process `\policy_gate.$proc$rtl/policy_gate.v:21$104'.
+  created $adff cell `$procdff$308' with positive edge clock and positive level reset.
+Creating register for signal `\snn_reflex_core.\reflex_active' using process `\snn_reflex_core.$proc$rtl/snn_reflex_core.v:34$98'.
+  created $adff cell `$procdff$311' with positive edge clock and positive level reset.
+Creating register for signal `\snn_reflex_core.\v_mem' using process `\snn_reflex_core.$proc$rtl/snn_reflex_core.v:34$98'.
+  created $adff cell `$procdff$314' with positive edge clock and positive level reset.
+Creating register for signal `\snn_reflex_core.\potential' using process `\snn_reflex_core.$proc$rtl/snn_reflex_core.v:34$98'.
+  created $adff cell `$procdff$317' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\spike_drift' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$320' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\spike_spread' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$323' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\spike_shock' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$326' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\acc_drift' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$329' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\acc_spread' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$332' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\acc_change' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$335' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:56$14.$result' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$338' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:56$14.val' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$341' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:60$15.$result' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$344' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:60$15.val' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$347' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:66$16.$result' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$350' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:66$16.val' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$353' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:68$17.$result' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$356' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:68$17.val' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$359' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:76$18.$result' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$362' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:76$18.val' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$365' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:78$19.$result' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$368' with positive edge clock and positive level reset.
+Creating register for signal `\spike_encoder.\abs_val$func$rtl/spike_encoder.v:78$19.val' using process `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+  created $adff cell `$procdff$371' with positive edge clock and positive level reset.
+Creating register for signal `\symmetry_monitor.\drift_metric' using process `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+  created $adff cell `$procdff$374' with positive edge clock and positive level reset.
+Creating register for signal `\symmetry_monitor.\spread_metric' using process `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+  created $adff cell `$procdff$377' with positive edge clock and positive level reset.
+Creating register for signal `\symmetry_monitor.\sudden_change' using process `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+  created $adff cell `$procdff$380' with positive edge clock and positive level reset.
+Creating register for signal `\symmetry_monitor.\acc_m1' using process `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+  created $adff cell `$procdff$383' with positive edge clock and positive level reset.
+Creating register for signal `\symmetry_monitor.\acc_m2' using process `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+  created $adff cell `$procdff$386' with positive edge clock and positive level reset.
+Creating register for signal `\symmetry_monitor.\prev_m1_final' using process `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+  created $adff cell `$procdff$389' with positive edge clock and positive level reset.
+
+7.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+7.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 3 empty switches in `\policy_gate.$proc$rtl/policy_gate.v:21$104'.
+Removing empty process `policy_gate.$proc$rtl/policy_gate.v:21$104'.
+Found and cleaned up 2 empty switches in `\snn_reflex_core.$proc$rtl/snn_reflex_core.v:34$98'.
+Removing empty process `snn_reflex_core.$proc$rtl/snn_reflex_core.v:34$98'.
+Found and cleaned up 4 empty switches in `\spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+Removing empty process `spike_encoder.$proc$rtl/spike_encoder.v:36$20'.
+Found and cleaned up 3 empty switches in `\symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+Removing empty process `symmetry_monitor.$proc$rtl/symmetry_monitor.v:42$4'.
+Cleaned up 12 empty switches.
+
+7.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top_reflex_system.
+Optimizing module policy_gate.
+<suppressed ~4 debug messages>
+Optimizing module snn_reflex_core.
+<suppressed ~3 debug messages>
+Optimizing module spike_encoder.
+<suppressed ~18 debug messages>
+Optimizing module symmetry_monitor.
+<suppressed ~6 debug messages>
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top_reflex_system.
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top_reflex_system'.
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\spike_encoder'.
+<suppressed ~51 debug messages>
+Finding identical cells in module `\symmetry_monitor'.
+<suppressed ~6 debug messages>
+Removed a total of 20 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \top_reflex_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \policy_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \snn_reflex_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \spike_encoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$240.
+    dead port 2/2 on $mux $procmux$240.
+    dead port 1/2 on $mux $procmux$237.
+    dead port 2/2 on $mux $procmux$237.
+    dead port 1/2 on $mux $procmux$234.
+    dead port 2/2 on $mux $procmux$234.
+    dead port 1/2 on $mux $procmux$231.
+    dead port 2/2 on $mux $procmux$231.
+    dead port 1/2 on $mux $procmux$228.
+    dead port 2/2 on $mux $procmux$228.
+    dead port 1/2 on $mux $procmux$225.
+    dead port 2/2 on $mux $procmux$225.
+    dead port 1/2 on $mux $procmux$222.
+    dead port 2/2 on $mux $procmux$222.
+    dead port 1/2 on $mux $procmux$219.
+    dead port 2/2 on $mux $procmux$219.
+    dead port 1/2 on $mux $procmux$216.
+    dead port 2/2 on $mux $procmux$216.
+    dead port 1/2 on $mux $procmux$213.
+    dead port 2/2 on $mux $procmux$213.
+    dead port 1/2 on $mux $procmux$210.
+    dead port 2/2 on $mux $procmux$210.
+    dead port 1/2 on $mux $procmux$207.
+    dead port 2/2 on $mux $procmux$207.
+    dead port 1/2 on $mux $procmux$204.
+    dead port 2/2 on $mux $procmux$204.
+    dead port 1/2 on $mux $procmux$202.
+    dead port 2/2 on $mux $procmux$202.
+    dead port 1/2 on $mux $procmux$198.
+    dead port 2/2 on $mux $procmux$198.
+    dead port 1/2 on $mux $procmux$196.
+    dead port 2/2 on $mux $procmux$196.
+    dead port 1/2 on $mux $procmux$192.
+    dead port 2/2 on $mux $procmux$192.
+    dead port 1/2 on $mux $procmux$190.
+    dead port 2/2 on $mux $procmux$190.
+    dead port 1/2 on $mux $procmux$186.
+    dead port 2/2 on $mux $procmux$186.
+    dead port 1/2 on $mux $procmux$184.
+    dead port 2/2 on $mux $procmux$184.
+    dead port 1/2 on $mux $procmux$180.
+    dead port 2/2 on $mux $procmux$180.
+    dead port 1/2 on $mux $procmux$178.
+    dead port 2/2 on $mux $procmux$178.
+    dead port 1/2 on $mux $procmux$174.
+    dead port 2/2 on $mux $procmux$174.
+    dead port 1/2 on $mux $procmux$172.
+    dead port 2/2 on $mux $procmux$172.
+    dead port 1/2 on $mux $procmux$168.
+    dead port 2/2 on $mux $procmux$168.
+    dead port 1/2 on $mux $procmux$166.
+    dead port 2/2 on $mux $procmux$166.
+    dead port 1/2 on $mux $procmux$162.
+    dead port 2/2 on $mux $procmux$162.
+    dead port 1/2 on $mux $procmux$160.
+    dead port 2/2 on $mux $procmux$160.
+    dead port 1/2 on $mux $procmux$156.
+    dead port 2/2 on $mux $procmux$156.
+    dead port 1/2 on $mux $procmux$154.
+    dead port 2/2 on $mux $procmux$154.
+    dead port 1/2 on $mux $procmux$150.
+    dead port 2/2 on $mux $procmux$150.
+    dead port 1/2 on $mux $procmux$148.
+    dead port 2/2 on $mux $procmux$148.
+    dead port 1/2 on $mux $procmux$144.
+    dead port 2/2 on $mux $procmux$144.
+    dead port 1/2 on $mux $procmux$142.
+    dead port 2/2 on $mux $procmux$142.
+    dead port 1/2 on $mux $procmux$138.
+    dead port 2/2 on $mux $procmux$138.
+    dead port 1/2 on $mux $procmux$136.
+    dead port 2/2 on $mux $procmux$136.
+Running muxtree optimizer on module \symmetry_monitor..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 72 multiplexer ports.
+<suppressed ~69 debug messages>
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \top_reflex_system.
+  Optimizing cells in module \policy_gate.
+  Optimizing cells in module \snn_reflex_core.
+  Optimizing cells in module \spike_encoder.
+  Optimizing cells in module \symmetry_monitor.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\top_reflex_system'.
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\symmetry_monitor'.
+Removed a total of 3 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$305 ($adff) from module policy_gate (D = $procmux$123_Y, Q = \lock_counter).
+Adding EN signal on $procdff$335 ($adff) from module spike_encoder (D = $procmux$262_Y, Q = \acc_change).
+Adding EN signal on $procdff$332 ($adff) from module spike_encoder (D = $procmux$268_Y, Q = \acc_spread).
+Adding EN signal on $procdff$329 ($adff) from module spike_encoder (D = $procmux$274_Y, Q = \acc_drift).
+Setting constant 1-bit at position 0 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 1 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 2 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 3 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 4 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 5 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 6 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 7 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 8 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 9 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 10 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 11 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 12 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 13 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 14 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 15 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 16 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 17 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 18 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 19 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 20 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 21 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 22 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 23 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 24 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 25 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 26 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 27 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 28 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 29 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 30 on $procdff$344 ($adff) from module spike_encoder.
+Setting constant 1-bit at position 31 on $procdff$344 ($adff) from module spike_encoder.
+Adding EN signal on $procdff$380 ($adff) from module symmetry_monitor (D = $sub$rtl/symmetry_monitor.v:83$13_Y, Q = \sudden_change).
+Adding EN signal on $procdff$389 ($adff) from module symmetry_monitor (D = \acc_m1, Q = \prev_m1_final).
+Adding EN signal on $procdff$386 ($adff) from module symmetry_monitor (D = $procmux$285_Y, Q = \acc_m2).
+Adding EN signal on $procdff$374 ($adff) from module symmetry_monitor (D = \acc_m1, Q = \drift_metric).
+Adding EN signal on $procdff$383 ($adff) from module symmetry_monitor (D = $procmux$289_Y, Q = \acc_m1).
+Adding EN signal on $procdff$377 ($adff) from module symmetry_monitor (D = \acc_m2, Q = \spread_metric).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top_reflex_system..
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Removed 8 unused cells and 230 unused wires.
+<suppressed ~13 debug messages>
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+<suppressed ~1 debug messages>
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+<suppressed ~2 debug messages>
+Optimizing module top_reflex_system.
+
+8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \policy_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \snn_reflex_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \spike_encoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \symmetry_monitor..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top_reflex_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \policy_gate.
+  Optimizing cells in module \snn_reflex_core.
+  Optimizing cells in module \spike_encoder.
+  Optimizing cells in module \symmetry_monitor.
+  Optimizing cells in module \top_reflex_system.
+Performed a total of 0 changes.
+
+8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 2 cells.
+
+8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+Optimizing module top_reflex_system.
+
+8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \policy_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \snn_reflex_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \spike_encoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \symmetry_monitor..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top_reflex_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \policy_gate.
+  Optimizing cells in module \snn_reflex_core.
+  Optimizing cells in module \spike_encoder.
+  Optimizing cells in module \symmetry_monitor.
+  Optimizing cells in module \top_reflex_system.
+Performed a total of 0 changes.
+
+8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 0 cells.
+
+8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+
+8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+Optimizing module top_reflex_system.
+
+8.23. Finished fast OPT passes. (There is nothing left to do.)
+
+9. Executing FSM pass (extract and optimize FSM).
+
+9.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+9.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+9.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+
+9.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+9.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+9.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+Optimizing module top_reflex_system.
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 0 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \policy_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \snn_reflex_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \spike_encoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \symmetry_monitor..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top_reflex_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \policy_gate.
+  Optimizing cells in module \snn_reflex_core.
+  Optimizing cells in module \spike_encoder.
+  Optimizing cells in module \symmetry_monitor.
+  Optimizing cells in module \top_reflex_system.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+Optimizing module top_reflex_system.
+
+10.9. Finished fast OPT passes. (There is nothing left to do.)
+
+11. Executing MEMORY pass.
+
+11.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+11.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+11.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+11.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+11.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+11.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+
+11.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+11.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+11.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+
+11.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+11.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+Optimizing module top_reflex_system.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \policy_gate..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \snn_reflex_core..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \spike_encoder..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \symmetry_monitor..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \top_reflex_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \policy_gate.
+  Optimizing cells in module \snn_reflex_core.
+  Optimizing cells in module \spike_encoder.
+  Optimizing cells in module \symmetry_monitor.
+  Optimizing cells in module \top_reflex_system.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+Optimizing module top_reflex_system.
+
+12.9. Finished fast OPT passes. (There is nothing left to do.)
+
+13. Executing TECHMAP pass (map to technology primitives).
+
+13.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+verilog frontend filename /opt/homebrew/bin/../share/yosys/techmap.v
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `\$connect'.
+Generating RTLIL representation for module `\$input_port'.
+Successfully finished Verilog frontend.
+
+13.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $reduce_bool.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=11:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=11:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=11:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=20:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=20:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=20:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=1:A_WIDTH=24:B_SIGNED=1:B_WIDTH=20:Y_WIDTH=24:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=1:A_WIDTH=24:B_SIGNED=1:B_WIDTH=20:Y_WIDTH=24:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=1:A_WIDTH=24:B_SIGNED=1:B_WIDTH=20:Y_WIDTH=24:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=11:B_SIGNED=1:B_WIDTH=11:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=24:B_SIGNED=1:B_WIDTH=24:Y_WIDTH=24:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=24:B_SIGNED=1:B_WIDTH=24:Y_WIDTH=24:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=1:A_WIDTH=24:B_SIGNED=1:B_WIDTH=24:Y_WIDTH=24:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $mux.
+Using template $paramod$59c4d9a723a469db99eee461ca4fdd9fae171b7b\_90_alu for cells of type $alu.
+Using template $paramod$2653f68ddb8eab7b1907b4a20767b72a824a7a36\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc_v2.
+  add { 24'000000000000000000000000 \pixel_val } * $mul$rtl/symmetry_monitor.v:69$7_Y (32x32 bits, signed)
+  add \dist * \dist (11x11 bits, signed)
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod$c6cac7b66cb5130862ba6df599147e943f2b57cd\_90_alu for cells of type $alu.
+Using template $paramod$92a756966432b34ce84eafab06f04f8fcb0d72b0\_90_alu for cells of type $alu.
+Using template $paramod$14d07782363a044a791c9d5da6ba0be5d9762540\_90_alu for cells of type $alu.
+  add { 12'000000000000 \pixel_val } * \dist (20x11 bits, signed)
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010100 for cells of type $fa.
+Using template $paramod$6fc37af1c109ae54e8aed83fcd995c12d378ce93\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000011000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001011 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001011 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010100 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=25:B_SIGNED=0:B_WIDTH=24:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=25:B_SIGNED=0:B_WIDTH=24:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=25:B_SIGNED=0:B_WIDTH=24:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$lt:A_SIGNED=1:A_WIDTH=32:B_SIGNED=1:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$neg:A_SIGNED=1:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$neg:A_SIGNED=1:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$neg:A_SIGNED=1:A_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=25:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=25:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=25:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=33:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=33:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=33:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=33:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=33:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=33:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=33:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=33:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=33:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$18758953033a248684fca091132383c69e9b5bef\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$c6baa65225090ac0a120feab1b920965244aa496\_90_alu for cells of type $alu.
+Using template $paramod$400c7651a899d7a17809b04e69e36ebc18745d70\_90_alu for cells of type $alu.
+Using template $paramod$ba2b8c117ce4915aa78c6334bae512cf5c3ff68e\_90_alu for cells of type $alu.
+Using template $paramod$789c344356a154d2afc7b832b41d1067dbc946ba\_90_alu for cells of type $alu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000011001 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000011001 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100001 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100001 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=20:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=20:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=20:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=20:B_SIGNED=0:B_WIDTH=16:Y_WIDTH=20:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$a30a4cad7e4ae1931addd9d976af09af436c4ada\_90_alu for cells of type $alu.
+Running "alumacc" on wrapper $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=16:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$2bd81f420048247ff6903399c560fe0f8bd48ccc\_90_alu for cells of type $alu.
+No more expansions possible.
+<suppressed ~5788 debug messages>
+
+14. Executing OPT pass (performing simple optimizations).
+
+14.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+<suppressed ~720 debug messages>
+Optimizing module snn_reflex_core.
+<suppressed ~632 debug messages>
+Optimizing module spike_encoder.
+<suppressed ~2393 debug messages>
+Optimizing module symmetry_monitor.
+<suppressed ~7156 debug messages>
+Optimizing module top_reflex_system.
+
+14.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+<suppressed ~276 debug messages>
+Finding identical cells in module `\snn_reflex_core'.
+<suppressed ~543 debug messages>
+Finding identical cells in module `\spike_encoder'.
+<suppressed ~801 debug messages>
+Finding identical cells in module `\symmetry_monitor'.
+<suppressed ~2541 debug messages>
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 1387 cells.
+
+14.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \policy_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \snn_reflex_core..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \spike_encoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \symmetry_monitor..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_reflex_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+14.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \policy_gate.
+  Optimizing cells in module \snn_reflex_core.
+  Optimizing cells in module \spike_encoder.
+  Optimizing cells in module \symmetry_monitor.
+  Optimizing cells in module \top_reflex_system.
+Performed a total of 0 changes.
+
+14.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 0 cells.
+
+14.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+Removed 1009 unused cells and 3194 unused wires.
+<suppressed ~1013 debug messages>
+
+14.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+<suppressed ~14 debug messages>
+Optimizing module symmetry_monitor.
+<suppressed ~65 debug messages>
+Optimizing module top_reflex_system.
+
+14.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+14.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \policy_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \snn_reflex_core..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \spike_encoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \symmetry_monitor..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_reflex_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+14.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \policy_gate.
+  Optimizing cells in module \snn_reflex_core.
+  Optimizing cells in module \spike_encoder.
+  Optimizing cells in module \symmetry_monitor.
+  Optimizing cells in module \top_reflex_system.
+Performed a total of 0 changes.
+
+14.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 1 cells.
+
+14.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+Removed 0 unused cells and 23 unused wires.
+<suppressed ~2 debug messages>
+
+14.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+Optimizing module top_reflex_system.
+
+14.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+14.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \policy_gate..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \snn_reflex_core..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \spike_encoder..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \symmetry_monitor..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \top_reflex_system..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+14.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \policy_gate.
+  Optimizing cells in module \snn_reflex_core.
+  Optimizing cells in module \spike_encoder.
+  Optimizing cells in module \symmetry_monitor.
+  Optimizing cells in module \top_reflex_system.
+Performed a total of 0 changes.
+
+14.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\policy_gate'.
+Finding identical cells in module `\snn_reflex_core'.
+Finding identical cells in module `\spike_encoder'.
+Finding identical cells in module `\symmetry_monitor'.
+Finding identical cells in module `\top_reflex_system'.
+Removed a total of 0 cells.
+
+14.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+14.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \policy_gate..
+Finding unused cells or wires in module \snn_reflex_core..
+Finding unused cells or wires in module \spike_encoder..
+Finding unused cells or wires in module \symmetry_monitor..
+Finding unused cells or wires in module \top_reflex_system..
+
+14.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module policy_gate.
+Optimizing module snn_reflex_core.
+Optimizing module spike_encoder.
+Optimizing module symmetry_monitor.
+Optimizing module top_reflex_system.
+
+14.23. Finished fast OPT passes. (There is nothing left to do.)
+
+15. Printing statistics.
+
+=== policy_gate ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       64 wires
+      365 wire bits
+       10 public wires
+       85 public wire bits
+        8 ports
+       68 port bits
+      188 cells
+       42   $_AND_
+       16   $_DFFE_PP0P_
+       18   $_DFF_PP0_
+       49   $_MUX_
+       18   $_NOT_
+       30   $_OR_
+       15   $_XOR_
+
+   Estimated number of transistors:       1236+
+
+=== snn_reflex_core ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      284 wires
+      915 wire bits
+       14 public wires
+      142 public wire bits
+       12 ports
+      102 port bits
+      747 cells
+      289   $_AND_
+       37   $_DFF_PP0_
+       88   $_MUX_
+       44   $_NOT_
+      138   $_OR_
+      151   $_XOR_
+
+   Estimated number of transistors:       5518+
+
+=== spike_encoder ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      721 wires
+     2539 wire bits
+       21 public wires
+      441 public wire bits
+       12 ports
+      166 port bits
+     1812 cells
+      746   $_AND_
+       83   $_DFFE_PP0P_
+        3   $_DFF_PP0_
+      165   $_MUX_
+      169   $_NOT_
+      316   $_OR_
+      330   $_XOR_
+
+   Estimated number of transistors:      12650+
+
+=== symmetry_monitor ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      931 wires
+    10598 wire bits
+       15 public wires
+      223 public wire bits
+       10 ports
+      112 port bits
+     4148 cells
+     1868   $_AND_
+      136   $_DFFE_PP0P_
+      144   $_MUX_
+       87   $_NOT_
+      641   $_OR_
+     1272   $_XOR_
+
+   Estimated number of transistors:      32220+
+
+=== top_reflex_system ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       26 wires
+      310 wire bits
+       26 public wires
+      310 public wire bits
+       19 ports
+      226 port bits
+        4 submodules
+        1   policy_gate
+        1   snn_reflex_core
+        1   spike_encoder
+        1   symmetry_monitor
+
+   Estimated number of transistors:      51624+
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+     6895 top_reflex_system
+      188 policy_gate
+      747 snn_reflex_core
+     1812 spike_encoder
+     4148 symmetry_monitor
+
+        +----------Count including submodules.
+        | 
+     2026 wires
+    14727 wire bits
+       86 public wires
+     1201 public wire bits
+       61 ports
+      674 port bits
+        - memories
+        - memory bits
+        - processes
+     6895 cells
+     2945   $_AND_
+      235   $_DFFE_PP0P_
+       58   $_DFF_PP0_
+      446   $_MUX_
+      318   $_NOT_
+     1125   $_OR_
+     1768   $_XOR_
+        4 submodules
+        1   policy_gate
+        1   snn_reflex_core
+        1   spike_encoder
+        1   symmetry_monitor
+
+   Estimated number of transistors:      51624+
+
+End of script. Logfile hash: fbcb289d61, CPU: user 0.77s system 0.04s, MEM: 66.81 MB peak
+Yosys 0.60 (git sha1 5bafeb77dc71e054fa331ab9efa613e6fb0a1c49, clang++ 17.0.0 -fPIC -O3)
+Time spent: 29% 25x opt_expr (0 sec), 16% 17x opt_clean (0 sec), ...
