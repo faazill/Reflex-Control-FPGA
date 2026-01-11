@@ -1,6 +1,6 @@
 # FPGA-Based Geometric Stability Monitor
 
-**Status:** Hardware-Verified Prototype | **Target:** Artix-7 FPGA | **Synthesis:** Yosys Open-Source Flow
+**Status:** Simulation-Verified Prototype | **Target:** Artix-7 FPGA | **Synthesis:** Yosys Open-Source Flow
 
 ## Overview
 
